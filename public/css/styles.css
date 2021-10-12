@@ -1,0 +1,48 @@
+#chat-box {
+  width: 50em;
+  height: 25em;
+  margin-right: .5em;
+}
+
+#users-box {
+  width: 20em;
+  height: 25em;
+}
+
+#input-box {
+  width: 50em;
+  height: 5em;
+  display: flex;
+  margin-top: .5em;
+}
+
+section > div {
+  display: flex;
+}
+
+div {
+  width: max-content;
+}
+
+div > ul {
+  border: 1px solid black;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  list-style-type: none;
+}
+
+ul > li {
+  padding: 0.5rem 1rem;
+  word-wrap: break-word;
+}
+
+#chat-box > li:nth-child(odd) {
+  background: #efefef;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  margin-right: .5em;
+}
