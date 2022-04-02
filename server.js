@@ -40,8 +40,8 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     users.splice(idx, 1); 
-    io.emit('users', users);
+    io.emit('dconnect', users);
   });
 });
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 8080);
