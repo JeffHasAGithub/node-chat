@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
 
   const idx = users.add([{ id, name }]);
 
-  socket.emit('joined', name, users.get("users"), messages.get('msgs'));
+  io.to(id).emit('joined', name, users.get("users"), messages.get('msgs'));
   socket.broadcast.emit('users', users.get("users"));
 
   socket.on('message', (msg) => {
@@ -40,6 +40,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
+    users.del(id);
+    io.emit('users', users.get("users"));
   });
 });
 

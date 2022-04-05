@@ -19,5 +19,7 @@ socket.on('message', (msgs) => {
   chat.draw(msgs);
 });
 
-socket.on('dconnect', (users) => {
+socket.on('dconnect', (usrs) => {
+  console.log(usrs);
+  users.draw(usrs);
 });

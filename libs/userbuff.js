@@ -87,11 +87,17 @@ const _userbuff = function(max) {
     return buffer.length - 1;
   }
 
+  function del(id) {
+    buffer = buffer.filter((usr) => usr.get("id") != id);
+
+    return buffer.length;
+  }
+
   function clear() {
     buffer = []; 
   }
 
-  return { add, get, clear };
+  return { add, del, get, clear };
 }
 
 const userbuff = function(max) {
