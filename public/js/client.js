@@ -19,6 +19,7 @@ socket.on('users', (users) => {
 });
 
 socket.on('message', (msgs) => {
+  console.log(msgs);
   chat.msgs.add(msgs);
   chat.draw();
 });

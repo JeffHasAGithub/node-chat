@@ -1,5 +1,7 @@
 require('dotenv').config();
 const JNameGen = require('./libs/JNameGen');
+const msgbuff = require('./libs/msgbuff');
+const userbuff = require('./libs/userbuff');
 
 const express = require('express');
 const http = require('http');
@@ -19,23 +21,21 @@ app.get('/', (req, res) => {
 /////////////////////////////////////////////////////////////////
 
 const namegen = JNameGen('./res/names.txt');
-
-const users = [];
-const messages = [];
+const messages = msgbuff(25);
+const users = userbuff(25);
 
 io.on('connection', (socket) => {
   const uname = namegen.generate();
-  const idx = users.push(uname) - 1;
+  const idx = users.add([uname]);
 
-  socket.emit('joined', uname, users, messages);
+  socket.emit('joined', uname, users, messages.get('msgs'));
   socket.broadcast.emit('users', users);
 
   socket.on('message', (msg) => {
-    if (messages.length >= 20)
-      messages.shift();
+    messages.add(uname, [msg])
     
-    messages.push(`${uname}:\n\n${msg}`);
-    io.emit('message', messages);
+    console.log(messages.get());
+    io.emit('message', messages.get());
   });
 
   socket.on('disconnect', () => {
