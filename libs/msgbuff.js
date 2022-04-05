@@ -1,6 +1,6 @@
 const _msg = function(user, text) {
   // get: get property $prop
-  // returns null on error
+  // returns null if $prop not found
   function get(prop) {
     const lprop = prop.toLowerCase();
 
@@ -12,7 +12,7 @@ const _msg = function(user, text) {
       case "text":
           copy = text;
           break;
-      default:
+      case "all":
         copy = { user, text };
         break;
     }
@@ -21,7 +21,7 @@ const _msg = function(user, text) {
   }
 
   // set: set property $prop to value $val
-  // returns null on error
+  // returns null if $prop not found
   function set(prop, val) {
     const lprop = prop.toLowerCase();
 
@@ -59,10 +59,10 @@ const _msgbuff = function(max) {
       case "msg":
         if (Number.isinteger(i))
           if (i < buffer.length)
-            copy = buffer[i].get('text');
+            copy = buffer[i].get();
         break;
       case "msgs":
-        copy = buffer.map((msg) => msg.get('text'));
+        copy = buffer.map((msg) => msg.get('all'));
         break;
       default:
         break;
@@ -81,6 +81,8 @@ const _msgbuff = function(max) {
 
       buffer.push(_msg(user, msg));
     });
+
+    return buffer.length - 1;
   }
 
   function clear() {

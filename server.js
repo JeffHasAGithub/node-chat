@@ -25,22 +25,21 @@ const messages = msgbuff(25);
 const users = userbuff(25);
 
 io.on('connection', (socket) => {
-  const uname = namegen.generate();
-  const idx = users.add([uname]);
+  const id = socket.id;
+  const name = namegen.generate();
 
-  socket.emit('joined', uname, users, messages.get('msgs'));
-  socket.broadcast.emit('users', users);
+  const idx = users.add([{ id, name }]);
+
+  socket.emit('joined', name, users.get("users"), messages.get('msgs'));
+  socket.broadcast.emit('users', users.get("users"));
 
   socket.on('message', (msg) => {
-    messages.add(uname, [msg])
+    messages.add(name, [msg])
     
-    console.log(messages.get());
-    io.emit('message', messages.get());
+    io.emit('message', messages.get('msgs'));
   });
 
   socket.on('disconnect', () => {
-    users.splice(idx, 1); 
-    io.emit('dconnect', users);
   });
 });
 

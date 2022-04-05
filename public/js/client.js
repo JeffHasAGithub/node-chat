@@ -1,30 +1,23 @@
-import dom from './dom.js';
+import input from './input.js';
+import users from './users.js';
 import chat from './chat.js';
 
 const socket = io();
-dom.init(socket);
+input.init(socket);
 
-chat.msgs.clear();
-
-socket.on('joined', (uname, users, msgs) => {
-  dom.displayUser(uname);
-  dom.buildUsers(users);
-
-  chat.msgs.add(msgs);
-  chat.draw();
+socket.on('joined', (uname, usrs, msgs) => {
+  input.displayUser(uname);
+  users.draw(usrs);
+  chat.draw(msgs);
 });
 
-socket.on('users', (users) => {
-  dom.buildUsers(users);
+socket.on('users', (usrs) => {
+  users.draw(usrs);
 });
 
 socket.on('message', (msgs) => {
-  console.log(msgs);
-  chat.msgs.add(msgs);
-  chat.draw();
+  chat.draw(msgs);
 });
 
 socket.on('dconnect', (users) => {
-  dom.buildUsers(users);
-
 });

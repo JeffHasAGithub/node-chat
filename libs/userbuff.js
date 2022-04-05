@@ -1,3 +1,49 @@
+const _user = function(id, name) {
+  // get: get property $prop
+  // returns null if $prop not found
+  function get(prop) {
+    const lprop = prop.toLowerCase();
+
+    let copy = null;
+    switch (lprop) {
+      case "id":
+        copy = id;
+        break;
+      case "name":
+        copy = name;
+        break;
+      case "all":
+        copy = { id, name };
+        break;
+      default:
+        break;
+    }
+
+    return copy;
+  }
+
+  // set: set property $prop to value $val
+  // returns null if $prop not found
+  function set(prop, val) {
+    const lprop = prop.toLowerCase();
+
+    switch (lprop) {
+      case "id":
+        id = val;
+        break;
+      case "name":
+        name = val;
+        break;
+      default:
+        return null;
+    }
+
+    return val;
+  }
+
+  return { get, set };
+};
+
 const _userbuff = function(max) {
   let buffer = []; 
 
@@ -18,7 +64,7 @@ const _userbuff = function(max) {
             copy = buffer[i];
         break; 
       case "users":
-        copy = buffer;
+        copy = buffer.map((usr) => usr.get('all'));
         break;
       default:
         break;
@@ -35,7 +81,7 @@ const _userbuff = function(max) {
       if (buffer.length >= max)
         buffer.shift();
 
-      buffer.push(user);
+      buffer.push(_user(user.id, user.name));
     });
 
     return buffer.length - 1;
@@ -51,3 +97,5 @@ const _userbuff = function(max) {
 const userbuff = function(max) {
   return _userbuff(max);
 }
+
+module.exports = userbuff;
