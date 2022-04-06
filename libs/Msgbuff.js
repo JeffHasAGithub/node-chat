@@ -92,10 +92,10 @@ const _msgbuff = function(max) {
   return { add, get, clear };
 };
 
-const msgbuff = function(max) {
+const Msgbuff = function(max) {
   return _msgbuff(max);
 } 
 
-module.exports = msgbuff;
+module.exports = Msgbuff;
 
 ///////////////////////////////////

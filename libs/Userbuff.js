@@ -100,8 +100,8 @@ const _userbuff = function(max) {
   return { add, del, get, clear };
 }
 
-const userbuff = function(max) {
+const Userbuff = function(max) {
   return _userbuff(max);
 }
 
-module.exports = userbuff;
+module.exports = Userbuff;

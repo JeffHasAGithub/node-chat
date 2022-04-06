@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const _JNameGen = function(names) {
+const _namegen = function(names) {
   function generate() {
     let idx = getRandomNum(names.length)
     const fname = names[idx];
@@ -15,14 +15,14 @@ const _JNameGen = function(names) {
   return { generate };
 };
 
-const JNameGen = function(fpath) {
+const Namegen = function(fpath) {
   const data = fs.readFileSync(fpath);
   const names = data.toString().trim().split('\n');
 
-  return _JNameGen(names);
+  return _namegen(names);
 }
 
-module.exports = JNameGen;
+module.exports = Namegen;
 
 ////////////////////////////////////////////////////
 
