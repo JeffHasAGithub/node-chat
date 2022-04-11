@@ -77,7 +77,6 @@ const _userbuff = function(max) {
     if (!Array.isArray(users))
       return false;
 
-		console.log(buffer.length);
     users.forEach((user) => {
       if (buffer.length >= max)
 				return;
