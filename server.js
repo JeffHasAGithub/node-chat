@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const sockets = require('./libs/Sockets');
 
 const express = require('express');

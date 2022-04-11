@@ -10,7 +10,7 @@
   <script defer src="../js/client.js" type="module"></script>
 </head>
 <body>
-  <section>
+  <section id="node-chat" hidden>
     <div>
       <ul id="chat-box"></ul>
       <ul id="users-box"></ul>
@@ -22,5 +22,7 @@
       </form>
     </div>
   </section>
+	<h1 id="connect-text" hidden>Could not connect to chat server. Try again later!</h1>
+	<button id="connect-btn">Connect</button>
 </body>
 </html>

@@ -5,7 +5,7 @@ const Userbuff = require('./Userbuff');
 const _sockets = function(io) {
   const namegen = Namegen('./res/names.txt');
   const msgbuff = Msgbuff(25);
-  const userbuff = Userbuff(25);
+  const userbuff = Userbuff(1);
 
   setInterval(() => {
     msgbuff.clear();
@@ -16,7 +16,10 @@ const _sockets = function(io) {
     const id = socket.id;
     const name = namegen.generate();
 
-    const idx = userbuff.add([{ id, name }]);
+		const o = userbuff.get("length");
+    const n = userbuff.add([{ id, name }]);
+		if (o === n)
+			io.to(id).emit('full');
 
     io.to(id).emit('joined', name, userbuff.get("users"), msgbuff.get('msgs'));
     socket.broadcast.emit('users', userbuff.get("users"));

@@ -77,14 +77,15 @@ const _userbuff = function(max) {
     if (!Array.isArray(users))
       return false;
 
+		console.log(buffer.length);
     users.forEach((user) => {
       if (buffer.length >= max)
-        buffer.shift();
+				return;
 
       buffer.push(_user(user.id, user.name));
     });
 
-    return buffer.length - 1;
+    return buffer.length;
   }
 
   function del(id) {
