@@ -16,6 +16,13 @@
   margin-top: .5em;
 }
 
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 95vh;
+}
+
 section > div {
   display: flex;
 }
@@ -45,4 +52,9 @@ textarea {
   resize: none;
   width: 100%;
   margin-right: .5em;
+}
+
+#connect-btn {
+	width: 10vw;
+	height: 10vh;
 }
