@@ -5,7 +5,7 @@ const Userbuff = require('./Userbuff');
 const _sockets = function(io) {
   const namegen = Namegen('./res/names.txt');
   const msgbuff = Msgbuff(25);
-  const userbuff = Userbuff(1);
+  const userbuff = Userbuff(50);
 
   setInterval(() => {
     msgbuff.clear();
